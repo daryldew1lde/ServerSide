@@ -1,0 +1,30 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Title{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    
+</head>
+<body>
+    <header>
+        <h1>Header</h1>
+        <!-- Add any other header content here -->
+    </header>
+
+    <main>
+        {% block content %}
+        <!-- This block will be replaced by specific content in other templates -->
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>Footer</p>
+        <!-- Add any other footer content here -->
+    </footer>
+</body>
+</html>
+

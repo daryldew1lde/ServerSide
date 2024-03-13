@@ -1,0 +1,58 @@
+<html>
+<head><meta charset="utf-8">
+	{% extends 'components/base.html' %} {% load static %} {% block styles %} {% endblock %} {% block content %} <!-- PAGE-HEADER -->
+</head>
+<body>
+
+<div class="page-header">
+
+
+<div class="ms-auto pageheader-btn">
+<ol class="breadcrumb">
+	<li class="breadcrumb-item"><a href="javascript:void(0);">Horaires</a></li>
+	<li aria-current="page" class="breadcrumb-item active">Details</li>
+</ol>
+</div>
+</div>
+<!-- PAGE-HEADER END --><!-- ROW-1 -->
+
+<div class="row">
+<div class="col-12 col-sm-12">
+<div class="card product-sales-main">
+<div class="card-header border-bottom">
+<h3 class="card-title mb-0">Details d'access</h3>
+</div>
+
+<div class="card-header border-bottom">
+    <h3 class="card-title">horaires d'acces de {{accesses.0.employe.nom}} {{accesses.0.employe.prenom}} le  {{accesses.0.date|date:'d-m-Y'}}</h3>
+</div>
+
+<div class="card-body">
+    <ul class="list-group">
+        {% for access in accesses %}
+            <li class="list-group-item">{{access.heure|time:"H:i"}}</li>
+            {% empty%}
+            Détails non disponibles
+        {% endfor %}
+    </ul>
+</div>
+</div>
+</div>
+<!-- COL END --></div>
+<!-- ROW-4 END -->
+
+{% endblock %}
+
+<p>
+   {% block scripts %} <!-- APEXCHART JS --> 
+    <script src="{% static 'assets/js/apexcharts.js'%}"></script>  
+	<!-- MY JS --><script src="{% static 'js/script.js'%}"></script><!-- INTERNAL SELECT2 JS --> 
+	<script src="{% static 'assets/plugins/select2/select2.full.min.js'%}"></script>
+	 <!-- CHART-CIRCLE JS--> <script src="{% static 'assets/js/circle-progress.min.js'%}"></script> <!-- INTERNAL Data tables js--> 
+	   <script src="{% static 'assets/js/index1.js'%}"></script> <!-- REPLY JS--> 
+	    <!-- THEMECOLORS JS --> 
+	   <script src="{% static 'assets/js/themeColors.js'%}"></script>
+	   {% endblock %}
+    </p>
+</body>
+</html>

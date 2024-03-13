@@ -1,0 +1,37 @@
+{% extends 'components/base.html' %}
+{% load static %}
+
+    {% block styles %}
+
+    {% endblock %}
+    
+        {% block content %}
+        <!-- PAGE-HEADER -->
+					<div class="page-header">
+						<div>
+							<h1 class="page-title">Statistique des données</h1>
+						</div>
+						<div class="ms-auto pageheader-btn">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item"><a href="javascript:void(0);">Statistiques</a></li>
+
+							</ol>
+						</div>
+					</div>
+					<!-- PAGE-HEADER END -->
+					<canvas id="myChart"></canvas>
+
+						
+        {% endblock %}
+
+    {% block scripts %}
+
+		<!-- CHARTJS JS -->
+		<script src=" {% static 'assets/plugins/chart/Chart.bundle.js' %} "></script>
+		<script src=" {% static 'assets/plugins/chart/utils.js' %} "></script>
+		<script src=" {% static 'assets/js/chart.js' %} "></script>
+
+		<!-- THEMECOLORS JS -->
+		<script src="{% static 'assets/js/themeColors.js'%}"></script>
+
+    {% endblock %}

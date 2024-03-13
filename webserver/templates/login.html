@@ -1,0 +1,34 @@
+<html>
+<head><meta charset="utf-8">
+	<title></title>
+</head>
+<body>
+<p>{% extends 'components/custom-base.html' %} {% load static %} {% block styles %} {% endblock %} {% block content %} <!-- PAGE --></p>
+
+<div class="page">
+<div><!-- CONTAINER OPEN -->
+<div class="col col-login mx-auto text-center"><a class="text-center" href="index"><img alt="" class="header-brand-img" src="{% static 'assets/images/brand/logofgcl.png' %}" /> </a></div>
+
+<div class="container-login100">
+<div class="wrap-login100 p-0">
+<div class="card-body">
+<form class="login100-form validate-form" method="post">{% csrf_token %} <span class="login100-form-title"> Bienvenue </span>
+
+<center><strong>{{error}}</strong></center>
+
+<div class="wrap-input100 validate-input" data-bs-validate="Ce champ est obligatoire"><input class="input100" name="email" placeholder="Identifiant" type="text" /> <span class="symbol-input100"> </span></div>
+
+<div class="wrap-input100 validate-input" data-bs-validate="Ce champ est obligatoire"><input class="input100" name="pass" placeholder="Mot de passe" type="password" /> <span class="symbol-input100"> </span></div>
+
+<div class="container-login100-form-btn"><button class="login100-form-btn btn-primary" type="submit">Se connecter</button></div>
+</form>
+</div>
+</div>
+</div>
+<!-- CONTAINER CLOSED --></div>
+</div>
+<!-- End PAGE -->
+
+<p>{% endblock %} {% block scripts %} {% endblock %}</p>
+</body>
+</html>

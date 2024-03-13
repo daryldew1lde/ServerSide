@@ -1,0 +1,119 @@
+{% extends 'components/base.html' %}
+{% load static %}
+
+    {% block styles %}
+
+    {% endblock %}
+    
+        {% block content %}
+        
+							<!-- PAGE-HEADER -->
+							<div class="page-header">
+								<div>
+									<h1 class="page-title">Modif Arrivee</h1>
+								</div>
+								<div class="ms-auto pageheader-btn">
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item">Apps</li>
+										<li class="breadcrumb-item"><a href="javascript:void(0);">Arrivee</a></li>
+										<li class="breadcrumb-item active" aria-current="page">Modif Arrivee</li>
+									</ol>
+								</div>
+							</div>
+							<!-- PAGE-HEADER END -->
+
+							<!--ROW OPENED-->
+							<div class="row">
+								<div class="col-lg-12 col-md-12">
+									<div  class="card">
+										<div class="card-headexr border-bottom">
+											<h4 class="mb-0">Info</h4>
+										</div>
+										<form method='post'>
+											{% csrf_token %}
+											<div class="card-body p-0 task-edit-main">
+												<div class="row p-5 border-bottom">
+													<div class="row">
+														<div class="form-group col-sm-12 col-md-12 col-xl-4">
+															<label class="form-label text-muted">Date:</label>
+															<div id="date1-datepicker" class="input-group date" data-date-format="dd-mm-yyyy">
+																<span class="input-group-addon input-group-text bg-primary-transparent"><i class="fe fe-calendar text-primary-dark"></i></span>
+																<input class="form-control task-start-date" type="date" name='date' value='{{arrivee_retour_employe.date|date:'Y-m-d'}}' placeholder="Select Start Date"/>
+															</div>
+														</div>
+													</div>
+													<div class="row">
+														<div class="form-group form-group col-sm-12 col-md-12 col-xl-6 ">
+															<label class="form-label text-muted">Nom:</label>
+															<div class="input-group" id="task-name">
+																<input type="text" name='nom' value='{{arrivee_retour_employe.employe.nom}} {{arrivee_retour_employe.employe.prenom}}' class="form-control text-dark" readonly>
+															</div>
+														</div>
+													</div>
+													<div class="row">
+														<div class="form-group col-sm-12 col-md-12 col-xl-6">
+															<label class="form-label text-muted">Heure d'arrivé:</label>
+															<div class="input-group" id="task-name">
+																<input type="time" name='heure_arrivee' value="{{arrivee_retour_employe.heure_arrive|time:'H:i'}}" class="form-control text-dark">
+															</div>
+														</div>
+													</div>
+													<input type="hidden" name='id' value="{{arrivee_retour_employe.id}}" class="form-control text-dark">
+													<div class="row">
+														<div class="form-group col-sm-12 col-md-12 col-xl-6">
+															<label class="form-label text-muted">Heure de départ</label>
+															<div class="input-group" id="task-name">
+																<input type="time" name='heure_retour' value="{{arrivee_retour_employe.heure_retour|time:'H:i'}}" class="form-control text-dark">
+															</div>
+														</div>
+													</div>
+													
+													
+												</div>
+												
+												<div class="row p-5">
+													<div class="btn-list text-end">
+														<a class="btn btn-outline-danger" href="{%url 'index'%}">
+															<i class="fe fe-x-circle"></i>
+															Anuler
+														</a>
+														<button type='submit' class="btn btn-primary">
+															<i class="fe fe-check-circle"></i>
+															Enregistrer
+														</button>
+													</div>
+												</div>
+												
+											</div>
+											
+                                        </form>
+									</div>
+								</div>
+							</div>
+							<!--ROW CLOSED-->
+
+        {% endblock %}
+
+    {% block scripts %}
+
+		<!-- SELECT2 JS -->
+		<script src=" {% static 'assets/plugins/select2/select2.full.min.js' %} "></script>
+
+		<!-- bootstrap-datepicker js -->
+
+
+		<!-- INTERNAL Summernote Editor js -->
+		<script src=" {% static 'assets/plugins/summernote-editor/summernote1.js' %} "></script>
+		<script src=" {% static 'assets/js/summernote.js' %} "></script>
+
+		<!-- FILE UPLOAD JS -->
+        <script src=" {% static 'assets/plugins/fileuploads/js/fileupload.js' %} "></script>
+        <script src=" {% static 'assets/plugins/fileuploads/js/file-upload.js' %} "></script>
+
+		<!-- TASK EDIT JS-->
+		<script src=" {% static 'assets/js/task-edit.js' %} "></script>
+
+        <!-- THEMECOLORS JS -->
+        <script src="{% static 'assets/js/themeColors.js'%}"></script>
+
+    {% endblock %}

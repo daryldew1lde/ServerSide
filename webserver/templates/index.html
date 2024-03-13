@@ -1,0 +1,137 @@
+<html>
+<head><meta charset="utf-8">
+	{% extends 'components/base.html' %} {% load static %} {% block styles %} {% endblock %} {% block content %} <!-- PAGE-HEADER -->
+</head>
+<body>
+
+<div class="page-header">
+
+
+<div class="ms-auto pageheader-btn">
+<ol class="breadcrumb">
+	<li class="breadcrumb-item"><a href="javascript:void(0);">Accueil</a></li>
+	<li aria-current="page" class="breadcrumb-item active">Tableau de Bord</li>
+</ol>
+</div>
+</div>
+<!-- PAGE-HEADER END --><!-- ROW-1 -->
+
+<div class="row">
+<div class="col-12 col-sm-12">
+<div class="card product-sales-main">
+<div class="card-header border-bottom">
+<h3 class="card-title mb-0">Liste des entrées</h3>
+</div>
+
+
+
+<div class="card-body">
+	<form method="post">
+		{% csrf_token %}
+		<div class="row">
+		  <strong class="mb-1">Trier par dates</strong>
+		  <div class="form-group col-sm-12 col-md-12 col-xl-3">
+			<div class="d-flex align-items-center">
+			  <label class="form-label text-muted">de: </label>
+			  <div id="date2-datepicker" class="input-group date ml-2 p-2" data-date-format="dd-mm-yyyy">
+				<span class="input-group-addon input-group-text bg-primary-transparent"><i class="fe fe-calendar text-primary-dark"></i></span>
+				<input class="form-control task-end-date" type="date" name="startDate"  placeholder="Select End Date" />
+			  </div>
+			</div>
+		  </div>
+		  <div class="form-group col-sm-12 col-md-12 col-xl-3">
+			<div class="d-flex align-items-center">
+			  <label class="form-label text-muted">a: </label>
+			  <div id="date2-datepicker" class="input-group date ml-2 p-2 " data-date-format="dd-mm-yyyy">
+				<span class="input-group-addon input-group-text bg-primary-transparent "><i class="fe fe-calendar text-primary-dark"></i></span>
+				<input class="form-control task-end-date" type="date" name="endDate"  placeholder="Select End Date" />
+			  </div>
+			</div>
+		  </div>
+		  <div class="col-sm-12 col-md-3 col-xl-3 p-2">
+			<button type="submit" class="btn btn-primary">
+			  Trier
+			</button>
+		  </div>
+		</div>
+	  </form>
+
+<div class="table-responsive export-table">
+<table  id="file-datatable" class="table table-bordered text-nowrap key-buttons border-bottom w-100" data-ordering="false">
+	<thead class="table-head">
+		<tr>
+			<th class="bg-transparent border-bottom-0" data-orderable="false">Date</th>
+			<th class="bg-transparent border-bottom-0" data-orderable="false">Nom</th>
+			<th class="bg-transparent border-bottom-0" data-orderable="false">Heure d&#39;arriv&eacute;</th>
+			<th class="bg-transparent border-bottom-0" data-orderable="false">Heure de d&eacute;part</th>
+			<th class="bg-transparent border-bottom-0" data-orderable="false">Temps pass&eacute;</th>
+			{% if user.is_superuser %}
+				<th class="bg-transparent border-bottom-0 no-btn">Action</th>
+			{% endif %}
+			
+		</tr>
+	</thead>
+	<tbody class="table-body">
+	    {% for arrivee_retour_employe in arrivee_retour_employe_list %} 
+		<tr>
+			<td>{{ arrivee_retour_employe.date|date:'d-m-Y'}}</td>
+			<td>{{ arrivee_retour_employe.employe.nom }} {{ arrivee_retour_employe.employe.prenom }}</td>
+			<td>{{ arrivee_retour_employe.heure_arrive|time:"H:i" }}</td>
+			<td>{% if arrivee_retour_employe.heure_retour %} {{ arrivee_retour_employe.heure_retour|time:"H:i" }} {% else %} Non disponible {% endif %}</td>
+			<td>{{arrivee_retour_employe.time_spent}}</td>
+			{% if user.is_superuser %}
+			<td>
+				<div class="d-flex align-items-stretch">
+					<a class="btn btn-sm btn-outline-primary border me-2" href="task-edit?id={{arrivee_retour_employe.id}}" > <svg enable-background="new 0 0 24 24" height="20" viewbox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M15.8085327,8.6464844l-5.6464233,5.6464844l-2.4707031-2.4697266c-0.0023804-0.0023804-0.0047607-0.0047607-0.0072021-0.0071411c-0.1972046-0.1932373-0.5137329-0.1900635-0.7069702,0.0071411c-0.1932983,0.1972656-0.1900635,0.5137939,0.0071411,0.7070312l2.8242188,2.8232422C9.9022217,15.4474487,10.02948,15.5001831,10.1621094,15.5c0.1326294,0.0001221,0.2598267-0.0525513,0.3534546-0.1464844l6-6c0.0023804-0.0023804,0.0047607-0.0046997,0.0071411-0.0071411c0.1932373-0.1972046,0.1900635-0.5137329-0.0071411-0.7069702C16.3183594,8.446106,16.0018311,8.4493408,15.8085327,8.6464844z M12,2C6.4771729,2,2,6.4771729,2,12s4.4771729,10,10,10c5.5201416-0.0064697,9.9935303-4.4798584,10-10C22,6.4771729,17.5228271,2,12,2z M12,21c-4.9705811,0-9-4.0294189-9-9s4.0294189-9,9-9c4.9683228,0.0054321,8.9945679,4.0316772,9,9C21,16.9705811,16.9705811,21,12,21z"></path></svg> </a> 
+					{% autoescape off %}<a class="btn btn-sm btn-outline-primary border me-2" href="detailsAccess?date={{arrivee_retour_employe.date|date:'Y-m-d'}}&matricule={{arrivee_retour_employe.employe.matricule}}">Details</a>{% endautoescape %}
+					<a class="btn btn-sm btn-outline-secondary border me-2 del" id='{{arrivee_retour_employe.id}}'> <svg height="20" viewbox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0V0z" fill="none"></path><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM8 9h8v10H8V9zm7.5-5l-1-1h-5l-1 1H5v2h14V4h-3.5z"></path></svg></a>
+					<div class="dropdown-menu dropdown-menu-start"><a class="dropdown-item" href="#">Modifier</a> <a class="dropdown-item" href="#"> Info</a></div>
+				</div>
+			</td>
+			{% endif %}
+			
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<!-- COL END --></div>
+<!-- ROW-4 END -->
+
+<p>{% endblock %} {% block modal %} <!--TASK MODAL--></p>
+
+
+
+<!--TASK MODAL ENDS-->
+
+<p>{% endblock %} {% block scripts %} <!-- APEXCHART JS --> <script src="{% static 'assets/js/apexcharts.js'%}"></script>  
+	<!-- MY JS --><script src="{% static 'js/script.js'%}"></script><!-- INTERNAL SELECT2 JS --> 
+	<script src="{% static 'assets/plugins/select2/select2.full.min.js'%}"></script>
+	 <!-- CHART-CIRCLE JS--> <script src="{% static 'assets/js/circle-progress.min.js'%}"></script> <!-- INTERNAL Data tables js--> 
+	 <script src="{% static 'assets/plugins/datatable/js/jquery.dataTables.min.js'%}"></script> 
+	 <script src="{% static 'assets/plugins/datatable/js/dataTables.bootstrap5.js'%}"></script> 
+	 <script src="{% static 'assets/plugins/datatable/dataTables.responsive.min.js'%}"></script>
+	   <script src="{% static 'assets/js/index1.js'%}"></script> <!-- REPLY JS--> 
+	    <!-- THEMECOLORS JS --> 
+	   <script src="{% static 'assets/js/themeColors.js'%}"></script>
+	
+		<script src=" {% static 'assets/plugins/datatable/js/dataTables.buttons.min.js' %} "></script>
+		<script src=" {% static 'assets/plugins/datatable/js/buttons.bootstrap5.min.js' %} "></script>
+		<script src=" {% static 'assets/plugins/datatable/js/jszip.min.js' %} "></script>
+		<script src=" {% static 'assets/plugins/datatable/pdfmake/pdfmake.min.js' %} "></script>
+		<script src=" {% static 'assets/plugins/datatable/pdfmake/vfs_fonts.js' %} "></script>
+		<script src=" {% static 'assets/plugins/datatable/js/buttons.html5.min.js' %} "></script>
+		<script src=" {% static 'assets/plugins/datatable/js/buttons.print.min.js' %} "></script>
+		<script src=" {% static 'assets/plugins/datatable/js/buttons.colVis.min.js' %} "></script>
+		<script src=" {% static 'assets/plugins/datatable/responsive.bootstrap5.min.js' %} "></script>
+		<script src=" {% static 'assets/js/table-data.js' %} "></script>
+
+		<!-- THEMECOLORS JS -->
+		<script src="{% static 'assets/js/themeColors.js'%}"></script>
+
+	   {% endblock %}</p>
+</body>
+</html>

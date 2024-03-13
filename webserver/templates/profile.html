@@ -1,0 +1,75 @@
+{% extends 'components/base.html' %}
+{% load static %}
+
+    {% block styles %}
+
+    {% endblock %}
+    
+        {% block content %}
+        
+							<!-- PAGE-HEADER -->
+							<div class="page-header">
+								<div>
+									<h1 class="page-title">Profil Utilisateur</h1>
+								</div>
+								<div class="ms-auto pageheader-btn">
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item"><a href="javascript:void(0);">Pofil </a></li>
+									
+									</ol>
+								</div>
+							</div>
+							<!-- PAGE-HEADER END -->
+
+							<!-- ROW-1 OPEN -->
+							<div class="row" id="user-profile">
+								<div class="col-lg-12">
+									<div class="card">
+										<div class="card-body">
+											<div class="row align-items-center">
+												<div class="col-lg-12 col-md-12 col-xl-6">
+													<div class="d-flex flex-wrap align-items-center">
+														<div class="profile-img-main rounded">
+															<img src="{% static 'assets/images/faces/6.jpg' %}" alt="img" class="m-0 p-1 rounded hrem-6">
+														</div>
+														<div class="ms-4">
+															<h4>{{user.username}}</h4>
+															<p class="text-muted mb-2">Vous avez été connecté pour la dernière fois le {{ user.last_login|date:"d/m/Y" }} à {{ user.last_login|time:"H:i" }}</p>
+														</div>
+													</div>
+												</div>
+												
+											</div>
+										</div>
+										
+									</div>
+									
+								</div><!-- COL-END -->
+							</div>
+							<!-- ROW-1 CLOSED -->
+
+        {% endblock %}
+
+    {% block scripts %}
+
+		<!-- INTERNAL GALLERY JS -->
+		<script src=" {% static 'assets/plugins/gallery/picturefill.js' %} "></script>
+        <script src=" {% static 'assets/plugins/gallery/lightgallery.js' %} "></script>
+        <script src=" {% static 'assets/plugins/gallery/lg-pager.js' %} "></script>
+        <script src=" {% static 'assets/plugins/gallery/lg-autoplay.js' %} "></script>
+        <script src=" {% static 'assets/plugins/gallery/lg-fullscreen.js' %} "></script>
+        <script src=" {% static 'assets/plugins/gallery/lg-zoom.js' %} "></script>
+        <script src=" {% static 'assets/plugins/gallery/lg-hash.js' %} "></script>
+        <script src=" {% static 'assets/plugins/gallery/lg-share.js' %} "></script>
+		<script src=" {% static 'assets/plugins/gallery/lightgallery-1.js' %} "></script>
+
+		<!-- PROFILE JS -->
+		<script src=" {% static 'assets/js/profile.js' %} "></script>
+
+        <!-- THEMECOLORS JS -->
+        <script src="{% static 'assets/js/themeColors.js'%}"></script>
+
+    {% endblock %}
+
+
+
